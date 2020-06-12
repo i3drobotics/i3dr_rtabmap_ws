@@ -56,12 +56,6 @@ sudo apt install --assume-yes libavcodec-dev libavformat-dev libswscale-dev libx
 sudo apt install --assume-yes libv4l-dev libtbb-dev libfaac-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev
 sudo apt install --assume-yes libvorbis-dev libxvidcore-dev v4l-utils
 ```
-Set OpenCV_DIR so packages use this OpenCV version rather than the ros inbuilt version
-Add this to ~/.bashrc otherwise will have to run this everytime you build
-```
-echo 'export OpenCV_DIR="PATH_TO_REPO/build/opencv3"' >> ~/.bashrc
-```
-*Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
 
 ## Install rtabmap dependencies:
 ```
@@ -69,7 +63,7 @@ sudo apt-get install libsqlite3-dev libpcl-dev libopencv-dev git cmake libproj-d
 sudo apt-get install python3-dev
 ```
 
-# Setup workspace
+# Initalise workspace
 
 ## Initalise wstool
 ```
@@ -84,34 +78,16 @@ wstool init
 git clone https://github.com/i3drobotics/i3dr_stereo_camera-ros.git
 ```
 
-## Add i3dr packages to wstool
-```
-wstool merge i3dr_stereo_camera-ros/install/i3dr_stereo_camera_ros_https.rosinstall
-```
+# Catkin setup
+Due to how catkin_make handles non ROS packages the instructions are different if you use 'catkin_make' to 'catkin build'.
+Catkin build is recommened as everything can be built together. (For catkin_make instructions see README_catkin_make.md).
+If you are using catkin build then continue with this document. Otherwise complete the catkin_make instructions and continue from 'Setup workspace'.
 
-## Add RTabMap packages to wstool
+## Setup OpenCV DIR:
+Set OpenCV_DIR so packages use this OpenCV version rather than the ros inbuilt version
+Add this to ~/.bashrc otherwise will have to run this everytime you build
 ```
-wstool merge i3dr_stereo_camera-ros/install/i3dr_rtabmap_ros_https.rosinstall
-```
-
-## Update wstool (download packages)
-```
-wstool update
-```
-
-## Install ros package dependcies:
-```
-export ROS_DISTRO=kinetic
-cd PATH_TO_REPO
-rosdep install --from-paths src --ignore-src -r -y
-```
-*Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
-
-## Setup usb camera permissions (Required for Deimos only)
-Copy udev rules for usb permission:
-```
-cd PATH_TO_REPO/src/i3dr_deimos-ros/
-sudo cp udev/99-uvc.rules /etc/udev/rules.d/
+echo 'export OpenCV_DIR="PATH_TO_REPO/build/opencv3"' >> ~/.bashrc
 ```
 *Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
 
@@ -164,7 +140,7 @@ Build workspace
 catkin build
 ```
 
-# Apply license for I3DRSGM
+## Add license for I3DRSGM
 License file should be provided from I3DR.
 Contact info@i3drobotics.com for a license to use I3DRSGM.
 
@@ -173,6 +149,24 @@ Copy I3DRSGM license file (.lic) to
 PATH_TO_REPO/devel/.private/i3dr_stereo_camera/lib/i3dr_stereo_camera/
 ```
 If you do not have a license then use build option -DWITH_I3DRSGM=OFF
+
+# Setup workspace
+
+## Install ros package dependcies:
+```
+export ROS_DISTRO=kinetic
+cd PATH_TO_REPO
+rosdep install --from-paths src --ignore-src -r -y
+```
+*Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
+
+## Setup usb camera permissions (Required for Deimos only)
+Copy udev rules for usb permission:
+```
+cd PATH_TO_REPO/src/i3dr_deimos-ros/
+sudo cp udev/99-uvc.rules /etc/udev/rules.d/
+```
+*Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
 
 # Source workspace
 Source workspace
