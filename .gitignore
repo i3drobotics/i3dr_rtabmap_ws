@@ -1,0 +1,13 @@
+devel/
+build/
+src/
+tmp/
+logs/
+.catkin_tools/
+.catkin_workspace/
+.vscode/
+
+deps/pylon_6.1.1.19861_x86_64_setup/
+deps/cuda-repo-ubuntu1604-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
+deps/Phobos-1.0.54-x86_64_reducedTemplates.deb
+deps/pylon_6.1.1.19861_x86_64_setup.tar.gz

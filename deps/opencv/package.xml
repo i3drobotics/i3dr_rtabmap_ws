@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+  <name>opencv3</name>
+  <version>3.4.10</version>
+  <description>OpenCV3</description>
+  <maintainer email="bknight@i3drobotics.com">Ben Knight</maintainer>
+  <author>OpenCV</author>
+  <license>BSD</license>
+  <url type="website">https://github.com/opencv/opencv</url>
+  <url type="bugtracker">https://github.com/opencv/opencv/issues</url>
+  <url type="repository">https://github.com/opencv/opencv</url>
+
+  <buildtool_depend>cmake</buildtool_depend>
+
+  <export>
+	 <build_type>cmake</build_type>
+  </export>
+</package>
