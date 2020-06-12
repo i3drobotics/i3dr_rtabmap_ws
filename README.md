@@ -3,6 +3,18 @@ This is a ROS workspace for mapping using I3DR Stereo Camera Systems with RTABMa
 
 # Setup dependencies
 
+## Install I3DRSGM library:
+Request I3DRSGM library installer from I3DR (info@i3drobotics.com)
+
+Install library deb:
+```
+sudo dpkg -i Phobos-1.0.54-x86_64_reducedTemplates.deb
+```
+Add library path to LD_LIBRARY_PATH (add this line to the end of ~/.bashrc):
+```
+echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/Phobos/lib/' >> ~/.bashrc
+```
+
 ## Install usb camera dependencies (Required for Deimos only)
 ```
 sudo apt-get install libv4l-dev v4l-utils qv4l2 v4l2ucp
@@ -55,18 +67,6 @@ echo 'export OpenCV_DIR="PATH_TO_REPO/build/opencv3"' >> ~/.bashrc
 ```
 sudo apt-get install libsqlite3-dev libpcl-dev libopencv-dev git cmake libproj-dev libqt5svg5-dev
 sudo apt-get install python3-dev
-```
-
-## Install I3DRSGM library:
-Request I3DRSGM library installer from I3DR (info@i3drobotics.com)
-
-Install library deb:
-```
-sudo dpkg -i Phobos-1.0.54-x86_64_reducedTemplates.deb
-```
-Add library path to LD_LIBRARY_PATH (add this line to the end of ~/.bashrc):
-```
-echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/Phobos/lib/' >> ~/.bashrc
 ```
 
 # Setup workspace
@@ -126,6 +126,8 @@ sudo cp PATH_TO_REPO/deps/opencv/package.xml PATH_TO_REPO/src/opencv/package.xml
 # Build workspace
 Configure catkin workspace (this will also build OpenCV, RTabMap, and Octomap with all the required options)
 ```
+cd PATH_TO_REPO
+catkin init
 catkin config --cmake-args -DCMAKE_BUILD_TYPE=RELEASE \
     -DWITH_CUDA=ON \
     -DCUDA_GENERATION=Auto \
@@ -155,15 +157,15 @@ catkin config --cmake-args -DCMAKE_BUILD_TYPE=RELEASE \
     -DENABLE_RTABMAP_OCTOMAP=ON \
     -DWITH_I3DRSGM=ON
 ```
+*Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
+
 Build workspace
 ```
-cd PATH_TO_REPO
-catkin init
-catkin config -DWITH_CUDA=OFF -DWITH_QT=ON -DWITH_I3DRSGM=ON
 catkin build
 ```
 
 # Apply license for I3DRSGM
+License file should be provided from I3DR.
 Contact info@i3drobotics.com for a license to use I3DRSGM.
 
 Copy I3DRSGM license file (.lic) to 
