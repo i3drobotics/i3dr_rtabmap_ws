@@ -186,7 +186,7 @@ roslaunch i3dr_deimos deimos.launch rviz:=true map:=true
 ```
 
 # Developer only
-(**Do not run thesethis if you don't know what you are doing**)
+(**Do not run these if you don't know what you are doing**)
 
 ## Build arduino firmare
 Build arduino firmware
