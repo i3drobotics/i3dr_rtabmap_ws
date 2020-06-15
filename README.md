@@ -104,7 +104,8 @@ Due to how catkin_make handles non ROS packages the build process is different i
 Catkin build is recommened as everything can be built together. (Catkin_make instructions will be added at a later date).
 
 ## Setup OpenCV DIR:
-Set OpenCV_DIR so packages use this OpenCV version rather than the ros inbuilt version
+Set OpenCV_DIR so packages use this OpenCV version rather than the ros inbuilt version.
+
 Add this to ~/.bashrc otherwise will have to run this everytime you build
 ```
 echo 'export OpenCV_DIR="PATH_TO_REPO/build/opencv3"' >> ~/.bashrc
