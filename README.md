@@ -11,7 +11,6 @@ wstool is used to setup the workspace so this needs to be installed with the fol
 sudo apt-get install python-wstool
 ```
 
-
 ## Install I3DRSGM library:
 Request I3DRSGM library installer from I3DR (info@i3drobotics.com)
 
@@ -124,6 +123,7 @@ This gives the required information to catkin to be able to build it in ROS.
 ```
 sudo cp PATH_TO_REPO/deps/opencv/package.xml PATH_TO_REPO/src/opencv/package.xml
 ```
+This is done so that the latest 3.4 version of opencv can be used without relying on a 3rd party to keep the package up to date.
 *Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
 
 # Build workspace
@@ -166,6 +166,7 @@ Build workspace
 ```
 catkin build
 ```
+*Note: This fully builds OpenCV with the required modules inside the workspace so may take a while (approx 20mins on a fast PC)*
 
 ## Add license for I3DRSGM
 License file should be provided from I3DR.
