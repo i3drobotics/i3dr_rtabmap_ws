@@ -79,9 +79,8 @@ git clone https://github.com/i3drobotics/i3dr_stereo_camera-ros.git
 ```
 
 # Catkin setup
-Due to how catkin_make handles non ROS packages the instructions are different if you use 'catkin_make' to 'catkin build'.
-Catkin build is recommened as everything can be built together. (For catkin_make instructions see README_catkin_make.md).
-If you are using catkin build then continue with this document. Otherwise complete the catkin_make instructions and continue from 'Setup workspace'.
+Due to how catkin_make handles non ROS packages the build process is different if you use 'catkin_make' to 'catkin build'.
+Catkin build is recommened as everything can be built together. (Catkin_make instructions will be added at a later date).
 
 ## Setup OpenCV DIR:
 Set OpenCV_DIR so packages use this OpenCV version rather than the ros inbuilt version
