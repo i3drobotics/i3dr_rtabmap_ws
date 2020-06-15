@@ -3,6 +3,9 @@ This is a ROS workspace for mapping using I3DR Stereo Camera Systems with RTABMa
 
 # Setup dependencies
 
+## ROS
+This guide assumes ROS Kinetic is fully installed. For install instructions see [link](http://wiki.ros.org/kinetic/Installation/Ubuntu)
+
 ## Install I3DRSGM library:
 Request I3DRSGM library installer from I3DR (info@i3drobotics.com)
 
@@ -44,7 +47,10 @@ Add the following to ~/.bashrc
 ```
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 export PATH=$PATH:/usr/local/cuda-10.2/bin
+export CUDA_CACHE_MAXSIZE=2147483648
+export CUDA_CACHE_DISABLE=0
 ```
+The CUDA_CACHE variables are set to avoid problems when stereo matching large images. 
 
 ## Install OpenCV dependencies:
 Install OpenCV dependencies
@@ -76,6 +82,21 @@ wstool init
 ## Get i3dr_stereo_camera-ros package
 ```
 git clone https://github.com/i3drobotics/i3dr_stereo_camera-ros.git
+```
+
+## Add i3dr packages to wstool
+```
+wstool merge i3dr_stereo_camera-ros/install/i3dr_stereo_camera_ros_https.rosinstall
+```
+
+## Add RTabMap packages to wstool
+```
+wstool merge i3dr_stereo_camera-ros/install/i3dr_rtabmap_ros_https.rosinstall
+```
+
+## Update wstool (download packages)
+```
+wstool update
 ```
 
 # Catkin setup
@@ -183,7 +204,7 @@ roslaunch i3dr_deimos deimos.launch rviz:=true map:=true
 # Developer only
 (**Do not run these if you don't know what you are doing**)
 
-## Build arduino firmare
+## Build arduino firmware
 Build arduino firmware
 ```
 catkin config -DARDUINO_SDK_PATH=PATH_TO_REPO/src/rosserial_adafruit_bno055/tools/arduino-linux
