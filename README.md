@@ -213,9 +213,22 @@ roslaunch i3dr_deimos deimos.launch rviz:=true map:=true
 (**Do not run these if you don't know what you are doing**)
 
 ## Build arduino firmware
-Build arduino firmware
+Arduino firmware requires building of the package with arduino sdk path. 
+Then the firmware built after the package due to issues with the build order.
+Build with arduino sdk
 ```
-catkin config -DARDUINO_SDK_PATH=PATH_TO_REPO/src/rosserial_adafruit_bno055/tools/arduino-linux
-e.g. catkin config -DARDUINO_SDK_PATH=/home/i3dr/i3dr_mapping_ws/src/rosserial_adafruit_bno055/tools/arduino-linux
+catkin config -DARDUINO_SDK_PATH=PATH_TO_REPO/src/i3dr_rosserial_phobos-ros/tools/arduino-linux
+e.g. catkin config -DARDUINO_SDK_PATH=/home/i3dr/i3dr_mapping_ws/src/i3dr_rosserial_phobos-ros/tools/arduino-linux
+catkin build i3dr_rosserial_phobos
 ```
 *Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
+
+Now the package has been built, build arduino firmware
+```
+source devel/setup.bash
+catkin build --no-deps i3dr_rosserial_phobos --make-args i3dr_rosserial_phobos_firmware_arduino_micro
+```
+Upload it to the arduino:
+```
+catkin build --no-deps i3dr_rosserial_phobos --make-args i3dr_rosserial_phobos_firmware_arduino_micro-upload
+```
