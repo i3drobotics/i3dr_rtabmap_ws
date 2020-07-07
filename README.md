@@ -50,7 +50,7 @@ sudo apt-get -y install cuda
 ```
 Add the following to ~/.bashrc
 ```
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
 export PATH=$PATH:/usr/local/cuda-10.2/bin
 export CUDA_CACHE_MAXSIZE=2147483648
 export CUDA_CACHE_DISABLE=0
@@ -121,7 +121,8 @@ echo 'export OpenCV_DIR="PATH_TO_REPO/build/opencv3"' >> ~/.bashrc
 Copy package.xml file from 'deps' in this repository to the opencv folder.
 This gives the required information to catkin to be able to build it in ROS.
 ```
-sudo cp PATH_TO_REPO/deps/opencv/package.xml PATH_TO_REPO/src/opencv/package.xml
+cd PATH_TO_REPO
+cp deps/opencv/package.xml src/opencv/package.xml
 ```
 This is done so that the latest 3.4 version of opencv can be used without relying on a 3rd party to keep the package up to date.
 *Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
