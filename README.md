@@ -4,7 +4,7 @@ This is a ROS workspace for mapping using I3DR Stereo Camera Systems with RTABMa
 # Setup dependencies
 
 ## ROS
-This guide assumes ROS Kinetic is fully installed. For install instructions see [link](http://wiki.ros.org/kinetic/Installation/Ubuntu)
+This guide assumes ROS Kinetic / Melodic is fully installed. For install instructions see [Kinetic](http://wiki.ros.org/kinetic/Installation/Ubuntu) [Melodic](http://wiki.ros.org/melodic/Installation/Ubuntu)
 
 wstool is used to setup the workspace so this needs to be installed with the following command:
 ```
@@ -38,13 +38,26 @@ rosdep update
 ```
 
 ## Install CUDA (Required for using OpenCV CUDA stereo matchers and I3DRSGM):
-Install CUDA (10.2):
+Download CUDA 10.2 for Ubuntu 16.04):
 ```
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-ubuntu1604.pin
 sudo mv cuda-ubuntu1604.pin /etc/apt/preferences.d/cuda-repository-pin-600
 wget http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda-repo-ubuntu1604-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
 sudo dpkg -i cuda-repo-ubuntu1604-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
 sudo apt-key add /var/cuda-repo-10-2-local-10.2.89-440.33.01/7fa2af80.pub
+sudo apt-get update
+sudo apt-get -y install cuda
+```
+Or download CUDA 10.2 for Ubuntu 18.04):
+```
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
+sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
+sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
+sudo add-apt-repository "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /"
+
+```
+Install CUDA 10.2
+```
 sudo apt-get update
 sudo apt-get -y install cuda
 ```
