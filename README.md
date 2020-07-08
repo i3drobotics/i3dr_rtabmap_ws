@@ -6,9 +6,10 @@ This is a ROS workspace for mapping using I3DR Stereo Camera Systems with RTABMa
 ## ROS
 This guide assumes ROS Kinetic / Melodic is fully installed. For install instructions see [Kinetic](http://wiki.ros.org/kinetic/Installation/Ubuntu) [Melodic](http://wiki.ros.org/melodic/Installation/Ubuntu)
 
-wstool is used to setup the workspace so this needs to be installed with the following command:
+wstool and catkin build are used to setup and build the workspace so these needs to be installed with the following commands:
 ```
 sudo apt-get install python-wstool
+sudo apt-get install python-catkin-tools
 ```
 
 ## Install I3DRSGM library:
