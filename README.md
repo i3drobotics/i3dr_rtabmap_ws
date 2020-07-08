@@ -139,6 +139,15 @@ cp deps/opencv/package.xml src/opencv/package.xml
 This is done so that the latest 3.4 version of opencv can be used without relying on a 3rd party to keep the package up to date.
 *Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
 
+# Setup workspace
+## Install ros package dependcies:
+```
+export ROS_DISTRO=kinetic
+cd PATH_TO_REPO
+rosdep install --from-paths src --ignore-src -r -y
+```
+*Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
+
 # Build workspace
 Configure catkin workspace (this will also build OpenCV, RTabMap, and Octomap with all the required options)
 ```
@@ -190,16 +199,6 @@ Copy I3DRSGM license file (.lic) to
 PATH_TO_REPO/devel/.private/i3dr_stereo_camera/lib/i3dr_stereo_camera/
 ```
 If you do not have a license then use build option -DWITH_I3DRSGM=OFF
-
-# Setup workspace
-
-## Install ros package dependcies:
-```
-export ROS_DISTRO=kinetic
-cd PATH_TO_REPO
-rosdep install --from-paths src --ignore-src -r -y
-```
-*Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
 
 ## Setup usb camera permissions (Required for Deimos only)
 Copy udev rules for usb permission:
