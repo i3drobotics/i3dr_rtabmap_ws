@@ -78,8 +78,9 @@ sudo apt-get install python3-dev
 
 ## Initalise wstool
 ```
-mkdir PATH_TO_REPO/src
-cd PATH_TO_REPO/src
+cd PATH_TO_REPO
+mkdir src
+cd src
 wstool init
 ```
 *Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
