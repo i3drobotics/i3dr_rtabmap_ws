@@ -104,6 +104,16 @@ git clone https://github.com/i3drobotics/i3dr_stereo_camera-ros.git
 wstool merge i3dr_stereo_camera-ros/install/i3dr_stereo_camera_ros_https.rosinstall
 ```
 
+## Add i3dr camera specific packages to wstool
+(Required for Deimos only)
+```
+wstool merge i3dr_stereo_camera-ros/install/i3dr_deimos_ros_https.rosinstall
+```
+(Required for Phobos only)
+```
+wstool merge i3dr_stereo_camera-ros/install/i3dr_phobos_ros_https.rosinstall
+```
+
 ## Add RTabMap packages to wstool
 ```
 wstool merge i3dr_stereo_camera-ros/install/i3dr_rtabmap_ros_https.rosinstall
