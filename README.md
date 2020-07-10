@@ -22,6 +22,7 @@ Add library path to LD_LIBRARY_PATH (add this line to the end of ~/.bashrc):
 ```
 echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/Phobos/lib/' >> ~/.bashrc
 ```
+Restart the shell or 'source ~/.bashrc' to make sure these variables are set.
 
 ## Install usb camera dependencies (Required for Deimos only)
 ```
@@ -66,6 +67,7 @@ export CUDA_CACHE_MAXSIZE=2147483648
 export CUDA_CACHE_DISABLE=0
 ```
 The CUDA_CACHE variables are set to avoid problems when stereo matching large images. 
+Restart the shell or 'source ~/.bashrc' to make sure these variables are set.
 
 ## Install OpenCV dependencies:
 Install OpenCV dependencies
@@ -136,6 +138,7 @@ Add the following to ~/.bashrc otherwise will have to run this everytime you bui
 export OpenCV_DIR="PATH_TO_REPO/build/opencv3"
 ```
 *Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
+Restart the shell or 'source ~/.bashrc' to make sure these variables are set.
 
 ## Make OpenCV ROS compatible
 Copy package.xml file from 'deps' in this repository to the opencv folder.
@@ -157,6 +160,7 @@ or
 ```
 export ROS_DISTRO=melodic
 ```
+Restart the shell or 'source ~/.bashrc' to make sure these variables are set.
 ## Install ros package dependcies:
 ```
 cd PATH_TO_REPO
