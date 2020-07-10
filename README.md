@@ -153,6 +153,10 @@ Add the following to ~/.bashrc:
 ```
 export ROS_DISTRO=kinetic
 ```
+or 
+```
+export ROS_DISTRO=melodic
+```
 ## Install ros package dependcies:
 ```
 cd PATH_TO_REPO
