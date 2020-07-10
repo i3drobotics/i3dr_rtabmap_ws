@@ -80,8 +80,7 @@ sudo apt install --assume-yes libvorbis-dev libxvidcore-dev v4l-utils
 
 ## Install rtabmap dependencies:
 ```
-sudo apt-get install libsqlite3-dev libpcl-dev libopencv-dev git cmake libproj-dev libqt5svg5-dev
-sudo apt-get install python3-dev
+sudo apt-get install libsqlite3-dev libpcl-dev libopencv-dev git cmake libproj-dev libqt5svg5-dev python3-dev
 ```
 
 # Initalise workspace
