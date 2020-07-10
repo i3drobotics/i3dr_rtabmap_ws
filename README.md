@@ -131,9 +131,9 @@ Catkin build is recommened as everything can be built together. (Catkin_make ins
 ## Setup OpenCV DIR:
 Set OpenCV_DIR so packages use this OpenCV version rather than the ros inbuilt version.
 
-Add this to ~/.bashrc otherwise will have to run this everytime you build
+Add the following to ~/.bashrc otherwise will have to run this everytime you build:
 ```
-echo 'export OpenCV_DIR="PATH_TO_REPO/build/opencv3"' >> ~/.bashrc
+export OpenCV_DIR="PATH_TO_REPO/build/opencv3"
 ```
 *Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
 
@@ -148,9 +148,13 @@ This is done so that the latest 3.4 version of opencv can be used without relyin
 *Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
 
 # Setup workspace
-## Install ros package dependcies:
+## Define ros distro version
+Add the following to ~/.bashrc:
 ```
 export ROS_DISTRO=kinetic
+```
+## Install ros package dependcies:
+```
 cd PATH_TO_REPO
 rosdep install --from-paths src --ignore-src -r -y
 ```
