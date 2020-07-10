@@ -18,9 +18,9 @@ Install library deb:
 ```
 sudo dpkg -i Phobos-1.0.54-x86_64_reducedTemplates.deb
 ```
-Add library path to LD_LIBRARY_PATH (add this line to the end of ~/.bashrc):
+Add this line to the end of ~/.bashrc to add library path to LD_LIBRARY_PATH variable:
 ```
-echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/Phobos/lib/' >> ~/.bashrc
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/Phobos/lib/
 ```
 Restart the shell or 'source ~/.bashrc' to make sure these variables are set.
 
