@@ -4,7 +4,7 @@ This is a ROS workspace for mapping using I3DR Stereo Camera Systems with RTABMa
 # Setup dependencies
 
 ## ROS
-This guide assumes ROS Kinetic / Melodic is fully installed. For install instructions see [Kinetic](http://wiki.ros.org/kinetic/Installation/Ubuntu) [Melodic](http://wiki.ros.org/melodic/Installation/Ubuntu)
+This guide assumes ROS Kinetic / Melodic is fully installed. For install instructions see [Kinetic](http://wiki.ros.org/kinetic/Installation/Ubuntu) or [Melodic](http://wiki.ros.org/melodic/Installation/Ubuntu)
 
 wstool and catkin build are used to setup and build the workspace so these needs to be installed with the following command:
 ``` 
