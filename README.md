@@ -26,7 +26,7 @@ Restart the shell or 'source ~/.bashrc' to make sure these variables are set.
 
 ## Install usb camera dependencies (Required for Deimos only)
 ```
-sudo apt-get install libv4l-dev v4l-utils qv4l2 v4l2ucp
+sudo apt-get install libv4l-dev v4l-utils qv4l2 v4l2ucp libudev-dev
 ```
 
 ## Install pylon (Required for Phobos only)
