@@ -4,11 +4,11 @@ This is a ROS workspace for mapping using I3DR Stereo Camera Systems with RTABMa
 # Setup dependencies
 
 ## ROS
-This guide assumes ROS Kinetic is fully installed. For install instructions see [link](http://wiki.ros.org/kinetic/Installation/Ubuntu)
+This guide assumes ROS Kinetic is installed on Ubuntu 16.04. For install instructions see [Kinetic](http://wiki.ros.org/kinetic/Installation/Ubuntu)
 
-wstool is used to setup the workspace so this needs to be installed with the following command:
-```
-sudo apt-get install python-wstool
+wstool and catkin build are used to setup and build the workspace so these needs to be installed with the following command:
+``` 
+sudo apt-get install python-wstool python-catkin-tools
 ```
 
 ## Install I3DRSGM library:
@@ -18,14 +18,15 @@ Install library deb:
 ```
 sudo dpkg -i Phobos-1.0.54-x86_64_reducedTemplates.deb
 ```
-Add library path to LD_LIBRARY_PATH (add this line to the end of ~/.bashrc):
+Add this line to the end of ~/.bashrc to add library path to LD_LIBRARY_PATH variable:
 ```
-echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/Phobos/lib/' >> ~/.bashrc
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/Phobos/lib/
 ```
+Restart the shell or 'source ~/.bashrc' to make sure these variables are set.
 
 ## Install usb camera dependencies (Required for Deimos only)
 ```
-sudo apt-get install libv4l-dev v4l-utils qv4l2 v4l2ucp
+sudo apt-get install libv4l-dev v4l-utils qv4l2 v4l2ucp libudev-dev
 ```
 
 ## Install pylon (Required for Phobos only)
@@ -38,24 +39,28 @@ rosdep update
 ```
 
 ## Install CUDA (Required for using OpenCV CUDA stereo matchers and I3DRSGM):
-Install CUDA (10.2):
+Download CUDA 10.2 for Ubuntu 16.04):
 ```
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-ubuntu1604.pin
 sudo mv cuda-ubuntu1604.pin /etc/apt/preferences.d/cuda-repository-pin-600
 wget http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda-repo-ubuntu1604-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
 sudo dpkg -i cuda-repo-ubuntu1604-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
 sudo apt-key add /var/cuda-repo-10-2-local-10.2.89-440.33.01/7fa2af80.pub
+```
+Install CUDA 10.2
+```
 sudo apt-get update
 sudo apt-get -y install cuda
 ```
 Add the following to ~/.bashrc
 ```
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
 export PATH=$PATH:/usr/local/cuda-10.2/bin
 export CUDA_CACHE_MAXSIZE=2147483648
 export CUDA_CACHE_DISABLE=0
 ```
 The CUDA_CACHE variables are set to avoid problems when stereo matching large images. 
+Restart the shell or 'source ~/.bashrc' to make sure these variables are set.
 
 ## Install OpenCV dependencies:
 Install OpenCV dependencies
@@ -70,16 +75,16 @@ sudo apt install --assume-yes libvorbis-dev libxvidcore-dev v4l-utils
 
 ## Install rtabmap dependencies:
 ```
-sudo apt-get install libsqlite3-dev libpcl-dev libopencv-dev git cmake libproj-dev libqt5svg5-dev
-sudo apt-get install python3-dev
+sudo apt-get install libsqlite3-dev libpcl-dev libopencv-dev git cmake libproj-dev libqt5svg5-dev python3-dev
 ```
 
 # Initalise workspace
 
 ## Initalise wstool
 ```
-mkdir PATH_TO_REPO/src
-cd PATH_TO_REPO/src
+cd PATH_TO_REPO
+mkdir src
+cd src
 wstool init
 ```
 *Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
@@ -92,6 +97,16 @@ git clone https://github.com/i3drobotics/i3dr_stereo_camera-ros.git
 ## Add i3dr packages to wstool
 ```
 wstool merge i3dr_stereo_camera-ros/install/i3dr_stereo_camera_ros_https.rosinstall
+```
+
+## Add i3dr camera specific packages to wstool
+(Required for Deimos only)
+```
+wstool merge i3dr_stereo_camera-ros/install/i3dr_deimos_ros_https.rosinstall
+```
+(Required for Phobos only)
+```
+wstool merge i3dr_stereo_camera-ros/install/i3dr_phobos_ros_https.rosinstall
 ```
 
 ## Add RTabMap packages to wstool
@@ -111,19 +126,35 @@ Catkin build is recommened as everything can be built together. (Catkin_make ins
 ## Setup OpenCV DIR:
 Set OpenCV_DIR so packages use this OpenCV version rather than the ros inbuilt version.
 
-Add this to ~/.bashrc otherwise will have to run this everytime you build
+Add the following to ~/.bashrc otherwise will have to run this everytime you build:
 ```
-echo 'export OpenCV_DIR="PATH_TO_REPO/build/opencv3"' >> ~/.bashrc
+export OpenCV_DIR="PATH_TO_REPO/build/opencv3"
 ```
 *Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
+Restart the shell or 'source ~/.bashrc' to make sure these variables are set.
 
 ## Make OpenCV ROS compatible
 Copy package.xml file from 'deps' in this repository to the opencv folder.
 This gives the required information to catkin to be able to build it in ROS.
 ```
-sudo cp PATH_TO_REPO/deps/opencv/package.xml PATH_TO_REPO/src/opencv/package.xml
+cd PATH_TO_REPO
+cp deps/opencv/package.xml src/opencv/package.xml
 ```
 This is done so that the latest 3.4 version of opencv can be used without relying on a 3rd party to keep the package up to date.
+*Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
+
+# Setup workspace
+## Define ros distro version
+Add the following to ~/.bashrc:
+```
+export ROS_DISTRO=kinetic
+```
+Restart the shell or 'source ~/.bashrc' to make sure these variables are set.
+## Install ros package dependcies:
+```
+cd PATH_TO_REPO
+rosdep install --from-paths src --ignore-src -r -y
+```
 *Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
 
 # Build workspace
@@ -177,16 +208,6 @@ Copy I3DRSGM license file (.lic) to
 PATH_TO_REPO/devel/.private/i3dr_stereo_camera/lib/i3dr_stereo_camera/
 ```
 If you do not have a license then use build option -DWITH_I3DRSGM=OFF
-
-# Setup workspace
-
-## Install ros package dependcies:
-```
-export ROS_DISTRO=kinetic
-cd PATH_TO_REPO
-rosdep install --from-paths src --ignore-src -r -y
-```
-*Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
 
 ## Setup usb camera permissions (Required for Deimos only)
 Copy udev rules for usb permission:
