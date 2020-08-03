@@ -140,7 +140,7 @@ This gives the required information to catkin to be able to build it in ROS.
 cd PATH_TO_REPO
 cp deps/opencv/package.xml src/opencv/package.xml
 ```
-This is done so that the latest 3.4 version of opencv can be used without relying on a 3rd party to keep the package up to date.
+This is done so that the latest 3.4 version of opencv can be used without relying on a 3rd party (other than OpenCV) to keep the package up to date.
 *Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
 
 # Setup workspace
@@ -156,6 +156,44 @@ cd PATH_TO_REPO
 rosdep install --from-paths src --ignore-src -r -y
 ```
 *Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
+
+### Fix libqglviewer bug
+If you get an error about a missing libqglviewer-dev-qt5, this is an issue from Octomap.
+This problem is due to an issue with building for qt 5. 
+Fix this by changing the following lines in the Octomap package.xml. Commenting out the Qt5 sections and uncommenting the Qt4 sections. 
+Provided in this repository is a package.xml you can replace the original with to make this quick and easy. Use the following command to 
+copy and replace this file:
+```
+cd PATH_TO_REPO
+cp deps/octoviz/package.xml src/octomap/octovis/package.xml
+```
+
+To do this manually, the file to change is located at: src/octomap/octovis/octovis/package.xml
+```
+<!-- Qt5 -->
+<!--<build_depend>libqglviewer-dev-qt5</build_depend>
+<build_depend>libqt5-core</build_depend>
+<build_depend>libqt5-opengl-dev</build_depend>-->
+
+<!-- Qt4 -->
+<build_depend>libqglviewer-qt4-dev</build_depend>
+<build_depend>libqt4-dev</build_depend>
+<build_depend>libqt4-opengl-dev</build_depend>
+
+<exec_depend>octomap</exec_depend>
+
+<!-- Qt5 -->
+<!--<exec_depend>libqglviewer2-qt5</exec_depend>
+<exec_depend>libqt5-core</exec_depend>
+<exec_depend>libqt5-gui</exec_depend>
+<exec_depend>libqt5-opengl</exec_depend>-->
+
+<!-- Qt4 -->
+<exec_depend>libqglviewer-qt4</exec_depend>
+<exec_depend>libqtgui4</exec_depend>
+<exec_depend>libqt4-opengl</exec_depend>
+```
+
 
 # Build workspace
 Configure catkin workspace (this will also build OpenCV, RTabMap, and Octomap with all the required options)
@@ -180,7 +218,7 @@ catkin config --cmake-args -DCMAKE_BUILD_TYPE=RELEASE \
     -DINSTALL_PYTHON_EXAMPLES=ON \
     -DINSTALL_C_EXAMPLES=OFF \
     -DOPENCV_EXTRA_MODULES_PATH=../../src/opencv_contrib/modules \
-    -DCUDA_NVCC_FLAGS="-D_FORCE_INLINES" \
+    -DCUDA_NVCC_FLAGS="-D_FORCE_INLINES --expt-relaxed-constexpr" \
     -DGTSAM_USE_SYSTEM_EIGEN=ON \
     -DWITH_CUDNN=ON \
     -DOPENCV_DNN_CUDA=ON \
@@ -198,6 +236,16 @@ Build workspace
 catkin build
 ```
 *Note: This fully builds OpenCV with the required modules inside the workspace so may take a while (approx 20mins on a fast PC)*
+
+### Fix OpenCV 'abs' build error
+If you get the following build error in OpenCV:
+```
+error: calling a constexpr __host__ function("abs") from a __device__ function("abs") is not allowed. The experimental flag '--expt-relaxed-constexpr' can be used to allow this.
+```
+Make sure you are using the build options from above:
+```
+-DCUDA_NVCC_FLAGS="-D_FORCE_INLINES --expt-relaxed-constexpr" \
+```
 
 ## Add license for I3DRSGM
 License file should be provided from I3DR.
