@@ -218,7 +218,7 @@ Then the firmware built after the package due to issues with the build order.
 Build with arduino sdk
 ```
 catkin config -DARDUINO_SDK_PATH=PATH_TO_REPO/src/i3dr_rosserial_phobos-ros/tools/arduino-linux
-e.g. catkin config -DARDUINO_SDK_PATH=/home/i3dr/i3dr_mapping_ws/src/i3dr_rosserial_phobos-ros/tools/arduino-linux
+e.g. catkin config -DARDUINO_SDK_PATH=/home/i3drwl001/Documents/mapping/i3dr_rtabmap_ws/src/i3dr_rosserial_phobos-ros/tools/arduino-linux
 catkin build i3dr_rosserial_phobos
 ```
 *Make sure to change 'PATH_TO_REPO' to the path to where you cloned this repository*
